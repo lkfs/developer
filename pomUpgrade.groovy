@@ -32,11 +32,11 @@ def read() {
             def venusGroup = false
             file.eachLine { line ->
                 {
-                    //判断是否venusoft组
+                    //判断是否 io.github.lkfs 组
                     def matcherGroup = line =~ "<groupId>(.*)</groupId>"
                     if (matcherGroup.find()) {
                         groupName = matcherGroup.group(1)
-                        if (groupName == 'com.venusoft')
+                        if (groupName == 'io.github.lkfs')
                             venusGroup = true;
                         else
                             venusGroup = false;
@@ -66,11 +66,11 @@ def update() {
             def venusGroup = false
             file.eachLine { line ->
                 {
-                    //判断是否venusoft组
+                    //判断是否 io.github.lkfs 组
                     def matcherGroup = line =~ "<groupId>(.*)</groupId>"
                     if (matcherGroup.find()) {
                         groupName = matcherGroup.group(1)
-                        if (groupName == 'com.venusoft')
+                        if (groupName == 'io.github.lkfs')
                             venusGroup = true;
                         else
                             venusGroup = false;

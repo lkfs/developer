@@ -1,6 +1,6 @@
 package ${repositoryPackage};
 
-import com.venusoft.developer.mongo.IBaseMongoRepository;
+import io.github.lkfs.developer.mongo.IBaseMongoRepository;
 import ${entityPackage}.${entityClassName};
 import org.springframework.stereotype.Repository;
 

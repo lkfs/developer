@@ -1,1 +1,1 @@
-com.venusoft.developer.auth.autoconfigure.DeveloperAuthAutoConfiguration
+io.github.lkfs.developer.auth.autoconfigure.DeveloperAuthAutoConfiguration

@@ -1,11 +1,11 @@
 package ${ctrlPackage};
 
-import com.venusoft.developer.common.entity.IBaseUser;
-import com.venusoft.developer.common.exception.BizException;
-import com.venusoft.developer.common.qo.BaseQO;
-import com.venusoft.developer.common.result.CommonObjectResult;
-import com.venusoft.developer.common.result.ICommonResult;
-import com.venusoft.developer.web.utils.UserHolder;
+import io.github.lkfs.developer.common.entity.IBaseUser;
+import io.github.lkfs.developer.common.exception.BizException;
+import io.github.lkfs.developer.common.qo.BaseQO;
+import io.github.lkfs.developer.common.result.CommonObjectResult;
+import io.github.lkfs.developer.common.result.ICommonResult;
+import io.github.lkfs.developer.web.utils.UserHolder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

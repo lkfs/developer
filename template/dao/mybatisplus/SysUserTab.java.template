@@ -4,7 +4,7 @@ package ${entityPackage};
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.venusoft.developer.mybatisplus.entity.BaseLogicDeleteTab;
+import io.github.lkfs.developer.mybatisplus.entity.BaseLogicDeleteTab;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

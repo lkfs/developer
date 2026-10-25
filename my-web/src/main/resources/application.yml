@@ -26,12 +26,10 @@ spring:
       repositories:
         enabled: false
 
-dp:
-  baseRoute: /user
-  uploadPath2: ${UPLOAD_PATH2:/tmp/uploadFiles/}
-  uploadHost2: ${UPLOAD_HOST2:http://127.0.0.1:8281/core/uploadFiles}
-  uploadPath: ${UPLOAD_PATH:d:/tmp/}
-  uploadHost: ${UPLOAD_HOST:http://127.0.0.1:8281/core/uploadFiles}
+developer:
+  upload:
+    path: ${UPLOAD_PATH:d:/tmp/}
+    host: ${UPLOAD_HOST:http://127.0.0.1:8281/core/uploadFiles}
 
 
 crypto:
@@ -56,7 +54,7 @@ logging:
     root: info
 
 springdoc:
-#  packagesToScan: com.venusoft.myweb, com.venusoft.developer
+#  packagesToScan: io.github.lkfs.myweb, io.github.lkfs.developer
   pathsToMatch: /sayHello, /file/**
   api-docs:
     path: /v3/api-docs

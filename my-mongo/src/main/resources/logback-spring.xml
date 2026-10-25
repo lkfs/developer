@@ -22,7 +22,7 @@
                     converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
     <conversionRule conversionWord="wEx"
                     converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
-    <conversionRule conversionWord="traceId" converterClass="com.venusoft.developer.common.log.TraceIdConverter"/>
+    <conversionRule conversionWord="traceId" converterClass="io.github.lkfs.developer.common.log.TraceIdConverter"/>
 
     <!-- 彩色日志格式 -->
     <property name="CONSOLE_LOG_PATTERN"

@@ -13,7 +13,7 @@
 - Spring Cloud 2025.1.4（[版本对照](https://github.com/spring-cloud/spring-cloud-release/wiki/Supported-Versions)）
 - 当前版本 9.0.0（`io.github.lkfs:developer`）
 
-> Maven groupId 为 `io.github.lkfs`，Java 包名仍为 `com.venusoft.*`。
+> Maven groupId 与 Java 包名均为 `io.github.lkfs`。
 
 ## 软件架构
 
@@ -101,9 +101,9 @@ groovy pomUpgrade.groovy
 ```json
 {
   "workModuleFolder": "my-mysql",
-  "workModulePackage": "com.venusoft.developer.mysql.mymysql",
+  "workModulePackage": "io.github.lkfs.developer.mysql.mymysql",
   "sdkModuleFolder": "my-mysql",
-  "sdkModulePackage": "com.venusoft.developer.mysql.mymysql"
+  "sdkModulePackage": "io.github.lkfs.developer.mysql.mymysql"
 }
 ```
 
@@ -123,12 +123,12 @@ groovy pomUpgrade.groovy
 4. 生成 Vue 页面（可选）
 - 在项目的根目录下，执行 groovy jVue.groovy，依提示输入 vueWorkFolder、vuePath，生成列表页、编辑页、弹窗及 API 文件
 
-> 注意：`template/` 下的模板仍指向已移除的 JPA/SQL 层（如 `com.venusoft.developer.sql.*`、`com.venusoft.developer.common.entity.*`），当前 9.0.0 的构建模块不包含这些类。使用代码生成前需先按现有模块（`developer-mybatis-plus`、`developer-common`、`developer-web`）调整模板。
+> 注意：`template/` 下的模板仍指向已移除的 JPA/SQL 层（如 `io.github.lkfs.developer.sql.*`、`io.github.lkfs.developer.common.entity.*`），当前 9.0.0 的构建模块不包含这些类。使用代码生成前需先按现有模块（`developer-mybatis-plus`、`developer-common`、`developer-web`）调整模板。
 
 ### 自动装配
-各模块自带 Spring Boot 自动装配（`META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`），引入依赖即生效，不需要在启动类上扫描 `com.venusoft`。
+各模块自带 Spring Boot 自动装配（`META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`），引入依赖即生效，不需要在启动类上扫描 `io.github.lkfs`。
 
-旧项目即使保留 `scanBasePackages = "com.venusoft"` 也不会重复注册 Bean，可以按需逐步移除。
+旧项目即使保留 `scanBasePackages = "io.github.lkfs"` 也不会重复注册 Bean，可以按需逐步移除。
 
 ### JSON 序列化
 `FastJsonConfig` 与 `HttpMessageConverters` 由 developer-common 统一创建（`DeveloperJsonAutoConfiguration`）：
@@ -235,7 +235,7 @@ spring:
       cache_menu_tree: 600
 ```
 连接配置使用 `spring.data.redis.*`（host、port、password、database、timeout、lettuce.pool.*）。
-`developer.redis.auto-type-packages` 控制反序列化允许的类名前缀，默认 `com.venusoft.,java.util.,java.math.`。
+`developer.redis.auto-type-packages` 控制反序列化允许的类名前缀，默认 `io.github.lkfs.,java.util.,java.math.`。
 
 ### 鉴权
 引入 developer-auth 后，可在方法上使用：

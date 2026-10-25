@@ -2,7 +2,7 @@ package ${managerPackage};
 
 import ${entityPackage}.${entityClassName};
 import ${repositoryPackage}.${repositoryClassName};
-import com.venusoft.developer.mongo.BaseMongoManager;
+import io.github.lkfs.developer.mongo.BaseMongoManager;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

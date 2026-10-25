@@ -1,7 +1,7 @@
 package ${qoPackage};
 
 import ${voPackage}.${voClassName};
-import com.venusoft.developer.mybatisplus.entity.BasePageQO;
+import io.github.lkfs.developer.mybatisplus.entity.BasePageQO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

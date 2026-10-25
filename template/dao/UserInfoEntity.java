@@ -1,6 +1,6 @@
 package ${entityPackage};
 
-import com.venusoft.developer.common.entity.CommonEntity;
+import io.github.lkfs.developer.common.entity.CommonEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;

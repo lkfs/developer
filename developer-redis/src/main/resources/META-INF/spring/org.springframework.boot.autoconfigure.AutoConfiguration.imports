@@ -1,1 +1,1 @@
-com.venusoft.developer.redis.autoconfigure.DeveloperRedisAutoConfiguration
+io.github.lkfs.developer.redis.autoconfigure.DeveloperRedisAutoConfiguration

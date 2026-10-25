@@ -19,10 +19,6 @@ spring:
     publisher-confirm-type: correlated
     virtual-host: ${RABBITMQ_VHOST:/}
 
-  cache7:
-    ttl:
-      user: 100
-      currency: 120
 
 
 ali:

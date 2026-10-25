@@ -2,8 +2,8 @@ package ${ctrlPackage};
 
 import ${sdkModulePackage}.dao.mapper.${managerClassName};
 import ${qoPackage}.${qoClassName};
-import com.venusoft.developer.common.result.CommonResult;
-import com.venusoft.developer.common.result.ICommonResult;
+import io.github.lkfs.developer.common.result.CommonResult;
+import io.github.lkfs.developer.common.result.ICommonResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

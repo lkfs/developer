@@ -1,2 +1,2 @@
-com.venusoft.developer.common.autoconfigure.DeveloperCommonAutoConfiguration
-com.venusoft.developer.common.autoconfigure.DeveloperJsonAutoConfiguration
+io.github.lkfs.developer.common.autoconfigure.DeveloperCommonAutoConfiguration
+io.github.lkfs.developer.common.autoconfigure.DeveloperJsonAutoConfiguration
