@@ -14,6 +14,7 @@
 - 当前版本 9.0.0（`io.github.lkfs:developer`）
 
 > Maven groupId 与 Java 包名均为 `io.github.lkfs`。
+> 检查部署：curl -s -o /dev/null -w "%{http_code}\n" https://repo1.maven.org/maven2/io/github/lkfs/developer-common/9.0.0/developer-common-9.0.0.jar
 
 ## 软件架构
 
