@@ -1,0 +1,48 @@
+server:
+  port: 8086
+
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/developer_test}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    publisher-returns: true
+    publisher-confirm-type: correlated
+    virtual-host: ${RABBITMQ_VHOST:/}
+
+ali:
+  oss:
+    accessKeyId: ${ALIYUN_OSS_ACCESS_KEY_ID:}
+    accessKeySecret: ${ALIYUN_OSS_ACCESS_KEY_SECRET:}
+    endpoint: ${ALIYUN_OSS_ENDPOINT:oss-me-east-1.aliyuncs.com}
+    publicBucket: ${ALIYUN_OSS_PUBLIC_BUCKET:}
+    privateBucket: ${ALIYUN_OSS_PRIVATE_BUCKET:}
+
+#微信
+wechat:
+  mp:
+    appId: ${WECHAT_MP_APP_ID:}
+    appSecret: ${WECHAT_MP_APP_SECRET:}
+    token: ${WECHAT_MP_TOKEN:}
+    template:
+      noticeId: ${WECHAT_TEMPLATE_NOTICE_ID:}
+      auditId: ${WECHAT_TEMPLATE_AUDIT_ID:}
+  miniprogram:
+    staff:
+      appId: ${WECHAT_MINIPROGRAM_STAFF_APP_ID:}
+      appSecret: ${WECHAT_MINIPROGRAM_STAFF_APP_SECRET:}
+    resident:
+      appId: ${WECHAT_MINIPROGRAM_RESIDENT_APP_ID:}
+      appSecret: ${WECHAT_MINIPROGRAM_RESIDENT_APP_SECRET:}
+
+logging:
+  level:
+    org.springframework.data.mongodb.core: DEBUG

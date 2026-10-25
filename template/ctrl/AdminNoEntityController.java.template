@@ -1,0 +1,49 @@
+package ${ctrlPackage};
+
+import com.venusoft.developer.common.entity.IBaseUser;
+import com.venusoft.developer.common.exception.BizException;
+import com.venusoft.developer.common.qo.BaseQO;
+import com.venusoft.developer.common.result.CommonObjectResult;
+import com.venusoft.developer.common.result.ICommonResult;
+import com.venusoft.developer.web.utils.UserHolder;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * TODO
+ *
+ * @author : lkfs
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+
+@RestController
+@RequestMapping("${context}")
+@Slf4j
+@Api(tags = "${tags}")
+public class ${ctrlClassName} {
+    @Resource
+    private RedisTemplate<String, String> redisTemplate;
+
+    @PostMapping("/${route}")
+    @ApiOperation("NoEntity")
+    public ICommonResult exec(
+            @RequestBody @ApiParam(required = true) @Validated BaseQO qo,
+            @RequestHeader(required = false) String platform,
+            @RequestHeader(required = false) String version,
+            HttpServletRequest request) {
+
+        IBaseUser<String> curUser = UserHolder.get().orElseThrow(() -> BizException.DATA_NOT_FOUND.withMessage("The user does not exists"));
+
+        return new CommonObjectResult<>("success");
+
+
+    }
+}

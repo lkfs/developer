@@ -1,0 +1,54 @@
+package ${ctrlPackage};
+
+import ${sdkModulePackage}.dao.entity.${entityClassName};
+import ${sdkModulePackage}.dao.mapper.${managerClassName};
+import ${qoPackage}.${qoClassName};
+import ${voPackage}.${voClassName};
+import cn.hutool.core.bean.BeanUtil;
+import com.venusoft.developer.common.result.CommonResult;
+import com.venusoft.developer.common.result.ICommonResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * TODO
+ *
+ * @author : lkfs
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+
+@RestController
+@RequestMapping("${context}")
+@Slf4j
+@Tag(name = "${tags}", description = "")
+public class ${ctrlClassName} {
+    @Resource
+    private ${managerClassName} ${managerObjectName};
+
+    @PostMapping("/${route}")
+    @Operation(summary = "详情", description = "")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = ${voClassName}.class), mediaType = "application/json")})})
+    public ICommonResult exec(
+            @RequestBody @Parameter(required = true) @Validated ${qoClassName} qo,
+            @RequestHeader(required = false) @Parameter(hidden = true) String platform,
+            @RequestHeader(required = false) @Parameter(hidden = true) String version,
+            @RequestHeader(required = false, name = "Accept-Language") @Parameter(hidden = true)  String language,
+            HttpServletRequest request) {
+
+        ${entityClassName} ${entityObjectName} = ${managerObjectName}.selectById(qo.${idGetMethod}());
+        ${voClassName} vo = BeanUtil.toBean(${entityObjectName}, ${voClassName}.class);
+        return new CommonResult<>(vo);
+
+
+    }
+}

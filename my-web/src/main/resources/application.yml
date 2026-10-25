@@ -1,0 +1,65 @@
+server:
+  port: 8880
+
+spring:
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 64MB
+      max-request-size: 100MB
+  web:
+    resources:
+      add-mappings: false
+  data:
+    redis:
+      database: 0
+      jedis:
+        pool:
+          max-active: 8
+          max-wait: -1
+          max-idle: 500
+          min-idle: 0
+      timeout: 2000
+      lettuce:
+        shutdown-timeout: 0
+      repositories:
+        enabled: false
+
+dp:
+  baseRoute: /user
+  uploadPath2: ${UPLOAD_PATH2:/tmp/uploadFiles/}
+  uploadHost2: ${UPLOAD_HOST2:http://127.0.0.1:8281/core/uploadFiles}
+  uploadPath: ${UPLOAD_PATH:d:/tmp/}
+  uploadHost: ${UPLOAD_HOST:http://127.0.0.1:8281/core/uploadFiles}
+
+
+crypto:
+  aesSecretKey: ${CRYPTO_AES_SECRET_KEY:}
+  aesIv: ${CRYPTO_AES_IV:}
+  enabled: false
+  excludes:
+    - /dp/upload
+
+
+tencent:
+  cos:
+    endpoint: cos.ap-beijing.myqcloud.com
+    secretId: ${TENCENT_COS_SECRET_ID:}
+    secretKey: ${TENCENT_COS_SECRET_KEY:}
+    region: ap-beijing
+    publicBucket: public-1301904767
+    privateBucket: private-1301904767
+
+logging:
+  level:
+    root: info
+
+springdoc:
+#  packagesToScan: com.venusoft.myweb, com.venusoft.developer
+  pathsToMatch: /sayHello, /file/**
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui2.html

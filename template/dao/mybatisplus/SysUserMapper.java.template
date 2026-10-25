@@ -1,0 +1,9 @@
+package ${entityPackage};
+
+import ${sdkModulePackage}.dao.entity.${entityClassName}Tab;
+import com.github.yulichang.base.MPJBaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ${entityClassName}Mapper extends MPJBaseMapper<${entityClassName}Tab> {
+}

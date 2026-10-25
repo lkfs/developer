@@ -1,0 +1,22 @@
+package ${qoPackage};
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import java.util.List;
+import java.math.BigDecimal;
+import java.util.Date;
+
+/**
+ * 参数支持动态查询后缀：Is、Eq、Neq、StartWith、EndWith、Like、Gt、Gte、Lt、Lte、Null、NotNull、In、NotIn
+ *
+ * @author : Luis
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+@Data
+public class ${qoClassName} {
+<% for( def f: fields ) {  %>
+	@Schema(description = "${f.comment}")
+	private ${f.type} ${f.fieldName};
+<% } %>
+
+}

@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:picture_book}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    publisher-returns: true
+    publisher-confirm-type: correlated
+    virtual-host: ${RABBITMQ_VHOST:/}
+
+  cache7:
+    ttl:
+      user: 100
+      currency: 120
+
+
+ali:
+  oss:
+    accessKeyId: ${ALIYUN_OSS_ACCESS_KEY_ID:}
+    accessKeySecret: ${ALIYUN_OSS_ACCESS_KEY_SECRET:}
+    endpoint: ${ALIYUN_OSS_ENDPOINT:oss-cn-zhangjiakou.aliyuncs.com}
+    publicBucket: ${ALIYUN_OSS_PUBLIC_BUCKET:}
+    privateBucket: ${ALIYUN_OSS_PRIVATE_BUCKET:}
+
+#微信
+wechat:
+  mp:
+    appId: ${WECHAT_MP_APP_ID:}
+    appSecret: ${WECHAT_MP_APP_SECRET:}
+    token: ${WECHAT_MP_TOKEN:}
+    template:
+      noticeId: ${WECHAT_TEMPLATE_NOTICE_ID:}
+      auditId: ${WECHAT_TEMPLATE_AUDIT_ID:}
+  miniprogram:
+    staff:
+      appId: ${WECHAT_MINIPROGRAM_STAFF_APP_ID:}
+      appSecret: ${WECHAT_MINIPROGRAM_STAFF_APP_SECRET:}
+    resident:
+      appId: ${WECHAT_MINIPROGRAM_RESIDENT_APP_ID:}
+      appSecret: ${WECHAT_MINIPROGRAM_RESIDENT_APP_SECRET:}
+
+logging:
+  level:
+    org.springframework.data.mongodb.core: DEBUG

@@ -1,0 +1,27 @@
+package ${qoPackage};
+
+import ${voPackage}.${voClassName};
+import com.venusoft.developer.mybatisplus.entity.BasePageQO;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import java.util.List;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * 参数支持动态查询后缀：Is、Eq、Neq、StartWith、EndWith、Like、Gt、Gte、Lt、Lte、Null、NotNull、In、NotIn
+ *
+ * @author : Luis
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class ${qoClassName} extends BasePageQO<${voClassName}> {
+<% for( def f: fields ) {  %>
+	@Schema(description = "${f.comment}")
+	private ${f.type} ${f.fieldName};
+<% } %>
+
+}

@@ -1,0 +1,58 @@
+package ${ctrlPackage};
+
+import ${sdkModulePackage}.dao.entity.${entityClassName};
+import ${sdkModulePackage}.dao.mapper.${managerClassName};
+import com.venusoft.developer.common.result.CommonResult;
+import com.venusoft.developer.common.result.ICommonResult;
+import com.venusoft.developer.web.qo.BaseSetSortQO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
+
+/**
+ * TODO
+ *
+ * @author : lkfs
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+@RestController
+@RequestMapping("${context}")
+@Slf4j
+@Tag(name = "${tags}", description = "")
+public class ${ctrlClassName} {
+    @Resource
+    private ${managerClassName} ${managerObjectName};
+
+    @PostMapping("/${route}")
+    @Operation(summary = "排序", description = "")
+    public ICommonResult exec(
+            @RequestBody @Parameter(required = true) @Validated BaseSetSortQO<String> qo,
+            @RequestHeader(required = false) @Parameter(hidden = true) String platform,
+            @RequestHeader(required = false) @Parameter(hidden = true) String version,
+            @RequestHeader(required = false, name = "Accept-Language") @Parameter(hidden = true)  String language,
+            HttpServletRequest request) {
+
+        List<${entityClassName}> ${entityObjectName}s = ${managerObjectName}.selectByIds(qo.getIds());
+        Map<String, ${entityClassName}> ${entityObjectName}Map = ${entityObjectName}s.stream().collect(Collectors.toMap(${entityClassName}::${idGetMethod}, v -> v));
+
+        AtomicInteger idx = new AtomicInteger(qo.getStart());
+        qo.getIds().forEach(k -> {
+            ${entityClassName} ${entityObjectName} = ${entityObjectName}Map.get(k);
+            ${entityObjectName}.setSort(idx.getAndIncrement());
+        });
+        ${managerObjectName}.updateById(${entityObjectName}s);
+
+        return new CommonResult<>("success");
+
+    }
+}

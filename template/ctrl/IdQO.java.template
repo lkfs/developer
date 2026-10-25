@@ -1,0 +1,24 @@
+package ${qoPackage};
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+
+/**
+ * 参数支持动态查询后缀：Is、Eq、Neq、StartWith、EndWith、Like、Gt、Gte、Lt、Lte、Null、NotNull、In、NotIn
+ *
+ * @author : Luis
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+@Data
+public class ${qoClassName} {
+<% for( def f: fields ) {
+	if(f.isKey) {%>
+	@Schema(description = "${f.comment}")
+	@NotBlank
+	private ${f.type} ${f.fieldName};
+<%	}
+}%>
+
+}

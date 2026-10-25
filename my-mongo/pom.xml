@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.github.lkfs</groupId>
+        <artifactId>developer</artifactId>
+        <version>9.0.0</version>
+    </parent>
+
+    <packaging>jar</packaging>
+
+    <artifactId>my-mongo</artifactId>
+    <version>9.0.0</version>
+
+    <properties>
+        <!-- 示例工程不发布到 Maven Central -->
+        <gpg.skip>true</gpg.skip>
+    </properties>
+
+    <dependencies>
+        <!-- module -->
+        <dependency>
+            <groupId>io.github.lkfs</groupId>
+            <artifactId>developer-common</artifactId>
+            <version>${developer.version}</version>
+            <!--<scope>compile</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>io.github.lkfs</groupId>
+            <artifactId>developer-crypto</artifactId>
+            <version>${developer.version}</version>
+            <!--<scope>compile</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>io.github.lkfs</groupId>
+            <artifactId>developer-web</artifactId>
+            <version>${developer.version}</version>
+            <!--<scope>compile</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>io.github.lkfs</groupId>
+            <artifactId>developer-mongo</artifactId>
+            <version>${developer.version}</version>
+            <!--<scope>compile</scope>-->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--测试-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

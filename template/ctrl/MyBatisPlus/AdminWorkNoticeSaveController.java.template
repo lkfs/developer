@@ -1,0 +1,64 @@
+package ${ctrlPackage};
+
+
+import ${sdkModulePackage}.dao.entity.${entityClassName};
+import ${sdkModulePackage}.dao.mapper.${managerClassName};
+import ${qoPackage}.${qoClassName};
+import com.venusoft.developer.common.exception.BizException;
+import com.venusoft.developer.common.result.CommonResult;
+import com.venusoft.developer.common.result.ICommonResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import com.venusoft.developer.common.security.IBaseUser;
+import com.venusoft.developer.common.security.SecurityUtils;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.util.ObjectUtils;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
+
+/**
+ * TODO
+ *
+ * @author : lkfs
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+
+@RestController
+@RequestMapping("${context}")
+@Slf4j
+@Tag(name = "${tags}", description = "")
+public class ${ctrlClassName} {
+    @Resource
+    private ${managerClassName} ${managerObjectName};
+
+    @PostMapping("/${route}")
+    @Operation(summary = "保存", description = "")
+    public ICommonResult exec(
+            @RequestBody @Parameter(required = true) @Validated ${qoClassName} qo,
+            @RequestHeader(required = false) @Parameter(hidden = true) String platform,
+            @RequestHeader(required = false) @Parameter(hidden = true) String version,
+            @RequestHeader(required = false, name = "Accept-Language") @Parameter(hidden = true)  String language,
+            HttpServletRequest request) {
+
+        IBaseUser<String> curUser = Optional.ofNullable(SecurityUtils.getUser(String.class)).orElseThrow(() -> BizException.DATA_NOT_FOUND.withMessage("The user does not exists"));
+
+        ${entityClassName} ${entityObjectName};
+        if (ObjectUtils.isEmpty(qo.${idGetMethod}())) {
+            ${entityObjectName} = new ${entityClassName}();
+            BeanUtils.copyProperties(qo, ${entityObjectName});
+            ${managerObjectName}.insert(${entityObjectName});
+        } else {
+            ${entityObjectName} = ${managerObjectName}.selectById(qo.${idGetMethod}());
+            BeanUtils.copyProperties(qo, ${entityObjectName});
+            ${managerObjectName}.updateById(${entityObjectName});
+        }
+
+        return new CommonResult<>(${entityObjectName}.${idGetMethod}());
+
+    }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Huawei OBS Form Upload Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 24px; max-width: 720px; }
+        label { display: block; margin-top: 16px; font-weight: bold; }
+        #log { white-space: pre-wrap; background: #f5f5f5; padding: 12px; border: 1px solid #ccc; border-radius: 6px; min-height: 120px; }
+        button { margin-top: 12px; padding: 8px 14px; }
+        .ok { color: #0a7d25; }
+        .err { color: #b00020; }
+    </style>
+</head>
+<body>
+<h2>Huawei OBS Policy Upload Test</h2>
+<p>This page fetches a post-signature from <code>http://localhost:8880/file/upload/getHuaweiToken</code> using the provided
+   Authorization header, then immediately uploads the selected file via OBS form POST.</p>
+
+<label for="fileInput">Choose file (upload starts automatically after token is fetched):</label>
+<input type="file" id="fileInput" accept="*/*">
+
+<div id="log"></div>
+
+<script>
+    const logBox = document.getElementById('log');
+    const fileInput = document.getElementById('fileInput');
+
+    function log(msg, type = '') {
+        const prefix = type === 'error' ? '✖ ' : type === 'success' ? '✔ ' : '';
+        const span = document.createElement('div');
+        span.className = type === 'error' ? 'err' : type === 'success' ? 'ok' : '';
+        span.textContent = prefix + msg;
+        logBox.appendChild(span);
+    }
+
+    async function getToken(objectName) {
+        const body = {
+            bucketName: 'public',
+            dir: 'tmp',
+            objectName
+        };
+        log('Requesting token...');
+        const res = await fetch('http://localhost:8880/file/upload/getHuaweiToken', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'BEARER_ADMIN::0a80dbd70ef54cd1b1223154c3fd72d3',
+                'platform': 'IOS',
+                'version': '1.0.5',
+                'Accept-Language': 'en',
+                'deviceId': '111001',
+                'time-zone': 'GMT+8',
+                'vpn': '0',
+                'sr': 'TUAlXs',
+                'ss': 'b702c87b87b1e5be92259f8cf3df681185cea90ab98fd07a1c4eb83dba51a24c',
+                'st': '1703516409401',
+                'deviceType': 'pad',
+                'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
+                'Accept': '*/*',
+                'Host': 'localhost:8880',
+                'Connection': 'keep-alive'
+            },
+            body: JSON.stringify(body)
+        });
+        if (!res.ok) throw new Error('Token request failed: ' + res.status + ' ' + res.statusText);
+        const data = await res.json();
+        log('Token acquired', 'success');
+        // Expected shape: { data: { signature: {...}, key: '', uploadUrl: '' } }
+        debugger
+        return data.result || data;
+    }
+
+    async function uploadFile(file) {
+        if (!file) return;
+        logBox.innerHTML = '';
+        try {
+            const objectName = file.name || 'abc.jpg';
+            const token = await getToken(objectName);
+
+            const form = new FormData();
+            const sig = token.signature || {};
+            Object.keys(sig).forEach(k => form.append(k, sig[k]));
+            // form.append('key', token.key);
+            form.append('file', file);
+
+            log('Uploading to ' + token.uploadUrl + ' ...');
+            debugger
+            const uploadRes = await fetch(token.uploadUrl, {
+                method: 'POST',
+                body: form
+            });
+
+            if (!uploadRes.ok) {
+                const text = await uploadRes.text();
+                throw new Error('Upload failed: ' + uploadRes.status + ' ' + uploadRes.statusText + '\n' + text);
+            }
+
+            log('Upload succeeded. Key: ' + token.key, 'success');
+        } catch (err) {
+            log(err.message || err.toString(), 'error');
+            console.error(err);
+        }
+    }
+
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            uploadFile(file);
+        }
+    });
+</script>
+</body>
+</html>

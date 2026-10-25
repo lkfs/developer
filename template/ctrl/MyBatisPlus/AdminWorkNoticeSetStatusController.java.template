@@ -1,0 +1,47 @@
+package ${ctrlPackage};
+
+import ${sdkModulePackage}.dao.entity.${entityClassName};
+import ${sdkModulePackage}.dao.mapper.${managerClassName};
+import com.venusoft.developer.common.result.CommonResult;
+import com.venusoft.developer.common.result.ICommonResult;
+import com.venusoft.developer.web.qo.BaseSetStatusQO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * TODO
+ *
+ * @author : lkfs
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+@RestController
+@RequestMapping("${context}")
+@Slf4j
+@Tag(name = "${tags}", description = "")
+public class ${ctrlClassName} {
+    @Resource
+    private ${managerClassName} ${managerObjectName};
+
+    @PostMapping("/${route}")
+    @Operation(summary = "设置状态", description = "")
+    public ICommonResult exec(
+            @RequestBody @Parameter(required = true) @Validated BaseSetStatusQO<String, Integer> qo,
+            @RequestHeader(required = false) @Parameter(hidden = true) String platform,
+            @RequestHeader(required = false) @Parameter(hidden = true) String version,
+            @RequestHeader(required = false, name = "Accept-Language") @Parameter(hidden = true)  String language,
+            HttpServletRequest request) {
+
+        ${entityClassName} ${entityObjectName} = ${managerObjectName}.selectById(qo.getId());
+        ${entityObjectName}.setStatus(qo.getStatus());
+        ${managerObjectName}.updateById(${entityObjectName});
+
+        return new CommonResult<>("success");
+
+    }
+}

@@ -1,0 +1,27 @@
+package ${voPackage};
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * @author : Luis
+ * @date : ${new Date().format("yyyy-MM-dd HH:mm")}
+ */
+@Data
+public class ${voClassName} implements Serializable {
+    @Serial
+    private static final long serialVersionUID = ${new Random().nextLong()}L;
+
+<% fields.each { f -> %>
+	@Schema(description = "${f.comment}")
+	private ${f.type} ${f.fieldName};
+<% } %>
+
+}
